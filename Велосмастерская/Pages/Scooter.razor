@@ -1,0 +1,31 @@
+﻿@page "/scooter"
+@using Microsoft.EntityFrameworkCore
+@using Велосмастерская.Model
+@inject BikeShopContext DB;
+
+<h1><center>Самокаты</center></h1>
+@foreach(var Scooter in Scooters)
+{
+    
+
+<div class="container">
+  <div class="row">
+    
+    <div class="col">
+      <h3><center>@Scooter.Type</center></h3>
+      
+          <p><h3>@Scooter.Description</h3></p>
+ <img style="wight:150px; height:150px" src=@($"images/{Scooter.Type}.jpg") />
+ <a href=@($"/scooter/{Scooter.Id}")><p>@Scooter.Type</p></a>
+</div>
+  </div>
+</div>
+}
+@code{
+
+    List<Model.Scooter> Scooters = new();
+    protected override async Task OnInitializedAsync()
+    {
+        Scooters = DB.Scooters.ToList();
+    }
+}

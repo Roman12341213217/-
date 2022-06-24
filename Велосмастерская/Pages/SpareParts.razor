@@ -1,0 +1,25 @@
+﻿@page "/SpareParts"
+@using Велосмастерская.Model
+@inject BikeShopContext DB
+
+<h1><center>Запчасти</center></h1>
+@foreach(var SparePart in SparePart)
+{
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3><center>@SparePart.Brakes</center></h3>
+            <img style="wight:150px; height:150px" src=@($"images/{SparePart.Brakes}.jpg") />
+    <p><h3>@SparePart.Description</h3></p>   
+    </div>
+  </div>
+</div>
+}
+@code{
+
+    List<SparePart> SparePart = new();
+    protected override async Task OnInitializedAsync()
+    {
+        SparePart = DB.SpareParts.ToList();
+    }
+}

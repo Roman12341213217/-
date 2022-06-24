@@ -1,0 +1,27 @@
+﻿@page "/Equipment"
+@using Велосмастерская.Model
+@inject BikeShopContext DB
+
+<h1><center>Экипировка</center></h1>
+@foreach(var Clothe in Clothes)
+{
+    
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <img style="wight:150px; height:150px" src=@($"images/eq{Clothe.Id}.jpg") />
+      <h3><center>@Clothe.BikeBikes</center></h3>
+       
+    </div>
+  </div>
+</div>
+}
+@code{
+
+    List<Clothe> Clothes = new();
+    protected override async Task OnInitializedAsync()
+    {
+        Clothes = DB.Clothes.ToList();
+    }
+}

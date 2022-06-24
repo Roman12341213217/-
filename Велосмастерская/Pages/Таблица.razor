@@ -1,0 +1,38 @@
+﻿@page "/Таблица"
+@using Велосмастерская.Model
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore.Design
+@inject BikeShopContext DB
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Кол-во заказов</th>
+      <th scope="col">ФИО</th>
+      <th scope="col">Дата Рождения</th>
+      <th scope="col">Телефон</th>
+       <th scope="col">Город</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var client in Clients)
+      {
+        <tr>
+        <th scope="row">1</th>
+        <td>@client.FullName</td>
+          <td>@client.DateOfBirth</td>
+        <td>@client.Phone</td>
+        <td>@client.City</td>
+        </tr>
+      }
+    
+  </tbody>
+</table>
+@code{
+
+    List<Client> Clients = new();
+    protected override async Task OnInitializedAsync()
+    {
+        Clients = DB.Clients.ToList();
+    }
+}

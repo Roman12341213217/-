@@ -1,0 +1,23 @@
+﻿@page "/Scooter/{id:int}"
+@using Велосмастерская.Model
+@inject BikeShopContext DB;
+
+<center><h3>@CurrentScooter.Type</h3></center>
+<div style="display:flex; ">
+<img scr src=@($"images/{CurrentScooter.Type}.jpg") width="300" height="300" />
+<ul>
+<li>Наименование: @CurrentScooter.Type</li>
+<li>В продаже: @CurrentScooter.ClientId</li>
+<li>Описание: @CurrentScooter.Description</li>
+<li>Цена: 17990</li>
+</ul>
+</div>
+@code {
+	[Parameter]
+	public int Id { get; set; }
+	public Model.Scooter CurrentScooter = new();
+	protected override async Task OnInitializedAsync()
+	{
+		CurrentScooter = DB.Scooters.FirstOrDefault(c => c.Id == Id);
+	}
+}
